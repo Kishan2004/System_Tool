@@ -10,7 +10,7 @@
 #include <fstream>
 
 static void clearScreen() {
-    // ANSI escape to clear screen and move cursor to home
+    
     std::cout << "\033[2J\033[H";
 }
 
@@ -35,7 +35,7 @@ unsigned long long readUptimeSeconds() {
 }
 
 int main() {
-    // Take initial CPU snapshot
+    
     CpuSnapshot prev = readCpuSnapshot();
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
@@ -61,14 +61,14 @@ int main() {
                   << (mi.available_kb/1024) << " MB available\n\n";
         std::cout << "Uptime: " << formatUptime(uptime_s) << "\n\n";
 
-        // Header for processes
+        
         std::cout << std::left << std::setw(8) << "PID"
                   << std::setw(30) << "COMMAND"
                   << std::setw(12) << "RSS(KB)"
                   << std::setw(12) << "CPU(s)" << "\n";
         std::cout << std::string(70, '-') << "\n";
 
-        // Show top N processes by RSS (we sorted by RSS)
+        
         int show = std::min(10, (int)procs.size());
         for (int i = 0; i < show; ++i) {
             const auto &p = procs[i];
